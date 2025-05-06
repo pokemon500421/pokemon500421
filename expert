@@ -1,0 +1,23 @@
+def medical_diagnosis():
+    print("Welcome to the Medical Expert System!")
+    print("Please answer the following questions with 'yes' or 'no'.")
+
+    fever = input("Do you have a fever? ").lower()
+    cough = input("Do you have a cough? ").lower()
+    sneezing = input("Are you sneezing? ").lower()
+    body_pain = input("Do you have body pain? ").lower()
+    breath = input("Are you experiencing shortness of breath? ").lower()
+
+    if fever == 'yes' and cough == 'yes' and body_pain == 'yes' and breath == 'yes':
+        print("\nDiagnosis: You might have COVID-19. Please consult a doctor immediately.")
+    elif fever == 'yes' and cough == 'yes' and body_pain == 'yes':
+        print("\nDiagnosis: You might have the Flu.")
+    elif sneezing == 'yes' and cough == 'yes':
+        print("\nDiagnosis: You might have a Common Cold.")
+    elif sneezing == 'yes' and fever == 'no':
+        print("\nDiagnosis: You might be experiencing Allergies.")
+    else:
+        print("\nDiagnosis: Symptoms are unclear. Please consult a medical professional.")
+
+# Run the expert system
+medical_diagnosis()
