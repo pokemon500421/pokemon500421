@@ -1,0 +1,53 @@
+# Disjoint Set Union (Union-Find) Helpers
+def find(parent, u):
+    if parent[u] != u:
+        parent[u] = find(parent, parent[u])  # Path compression
+    return parent[u]
+
+def union(parent, rank, u, v):
+    root_u = find(parent, u)
+    root_v = find(parent, v)
+    if root_u != root_v:
+        if rank[root_u] < rank[root_v]:
+            parent[root_u] = root_v
+        elif rank[root_u] > rank[root_v]:
+            parent[root_v] = root_u
+        else:
+            parent[root_v] = root_u
+            rank[root_u] += 1
+
+def kruskal_mst(graph):
+    edges = []
+    for u in graph:
+        for v, weight in graph[u]:
+            if u < v:  # Avoid duplicate edges
+                edges.append((weight, u, v))
+    edges.sort()  # Sort by weight
+
+    parent = {u: u for u in graph}
+    rank = {u: 0 for u in graph}
+    mst_edges = []
+    total_cost = 0
+
+    for weight, u, v in edges:
+        if find(parent, u) != find(parent, v):
+            union(parent, rank, u, v)
+            mst_edges.append((u, v, weight))
+            total_cost += weight
+
+    print("Kruskal's MST Result:")
+    for u, v, weight in mst_edges:
+        print(f"{u} - {v} (Weight: {weight})")
+    print("Total MST Cost:", total_cost)
+graph1 = {
+    0: [(1, 4), (7, 8)],
+    1: [(0, 4), (2, 8), (7, 11)],
+    2: [(1, 8), (3, 7), (5, 4), (8, 2)],
+    3: [(2, 7), (4, 9), (5, 14)],
+    4: [(3, 9), (5, 10)],
+    5: [(2, 4), (3, 14), (4, 10), (6, 2)],
+    6: [(5, 2), (7, 1), (8, 6)],
+    7: [(0, 8), (1, 11), (6, 1), (8, 7)],
+    8: [(2, 2), (6, 6), (7, 7)]
+}
+kruskal_mst(graph1)
