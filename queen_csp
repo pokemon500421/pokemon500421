@@ -1,0 +1,42 @@
+def solve_n_queens(n):
+    solutions = []
+    board = ['.' * n for _ in range(n)]  # 1D list of strings for clean printing
+
+    used_columns = [False] * n
+    used_diag1 = [False] * (2 * n - 1)  # row - col + n - 1
+    used_diag2 = [False] * (2 * n - 1)  # row + col
+
+    def place_queen(row, current_board):
+        if row == n:
+            solutions.append(current_board[:])  # Add a copy of the current board
+            return
+
+        for col in range(n):
+            d1 = row - col + n - 1
+            d2 = row + col
+
+            if not used_columns[col] and not used_diag1[d1] and not used_diag2[d2]:
+                # Place queen
+                new_row = '.' * col + 'Q' + '.' * (n - col - 1)
+                used_columns[col] = used_diag1[d1] = used_diag2[d2] = True
+
+                place_queen(row + 1, current_board + [new_row])
+
+                # Backtrack
+                used_columns[col] = used_diag1[d1] = used_diag2[d2] = False
+
+    place_queen(0, [])
+    return solutions
+
+def print_solutions(solutions):
+    print(f"\nTotal solutions: {len(solutions)}\n")
+    for solution in solutions:
+        for row in solution:
+            print(row)
+        print()
+
+# Driver Code
+print("Sumit Jadhav || TACO22115 (Simple Branch and Bound)")
+n = int(input("Enter the size of the chessboard (N): "))
+result = solve_n_queens(n)
+print_solutions(result)
