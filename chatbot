@@ -1,0 +1,21 @@
+# Simple chatbot for customer help
+
+print("Welcome to HelpBot!")
+print("Type your question (type 'bye' to exit)")
+
+while True:
+    user = input("You: ")
+
+    if user.lower() == "bye":
+        print("Bot: Goodbye! Have a nice day.")
+        break
+    elif user.lower() == "hi":
+        print("Bot: Hello! How can I help you?")
+    elif user.lower() == "what is your name":
+        print("Bot: I am HelpBot.")
+    elif user.lower() == "how can i return my order":
+        print("Bot: You can return your order within 7 days. Visit the Returns page.")
+    elif user.lower() == "when will my order arrive":
+        print("Bot: Orders usually arrive in 3 to 5 days.")
+    else:
+        print("Bot: Sorry, I don’t understand.")
