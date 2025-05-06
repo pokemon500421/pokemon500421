@@ -1,0 +1,31 @@
+def greedy_shortest_path_minimal(graph, start, end):
+    visited = {start}
+    path = [start]
+    current = start
+    cost = 0
+    while current != end:
+        neighbors = [(v, w) for v, w in graph.get(current, []) if v not in visited]
+        if not neighbors:
+            return None, float('inf')
+        nearest, weight = min(neighbors, key=lambda x: x[1])
+        visited.add(nearest)
+        path.append(nearest)
+        cost += weight
+        current = nearest
+    return path, cost
+
+graph1 = {
+    'A': [('B', 2), ('C', 5)],
+    'B': [('A', 2), ('D', 3)],
+    'C': [('A', 5), ('D', 1)],
+    'D': [('B', 3), ('C', 1)]
+}
+
+start_node = 'A'
+end_node = 'D'
+path, cost = greedy_shortest_path_minimal(graph1, start_node, end_node)
+
+if path:
+    print(f"Greedy Path: {path}, Cost: {cost}")
+else:
+    print("No path found.")
