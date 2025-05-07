@@ -1,0 +1,36 @@
+public class ee {
+public double myvalue=0;
+public Decimal mul(Decimal a,Decimal b){
+return a*b;        
+}
+    
+ public Decimal mul(Integer a, Integer b){
+ return a*b;
+}
+}
+
+
+
+
+ee a=new ee();
+Decimal res1=a.mul(8.0,9.0);
+Decimal res2=a.mul(8,9);
+System.debug(res1);
+System.debug(res2);
+
+
+
+
+public class ff {
+public Double myvalue=0;
+    public Double getupdatevalue(){
+        myvalue=myvalue+10;
+        return myvalue;
+    }
+}
+
+
+
+ff a=new ff();
+Double ans=a.getupdatevalue();
+System.debug(ans);
